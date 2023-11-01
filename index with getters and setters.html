@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Shower Presentation Engine</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <link rel="stylesheet" href="shower/themes/ribbon/styles/styles.css">
+    <script src="./microlight.js"></script>
+    <style>
+        .shower {
+            --slide-ratio: calc(16 / 9);
+        }
+            #cover h2 {
+                margin: 30px 0 0;
+                color: rgb(0, 0, 0);
+                text-align: center;
+                font-size: 5rem;
+                opacity: .8;
+            }
+
+            #cover p {
+                margin: 10px 0 0;
+                opacity: .8;
+                text-align: center;
+                color: rgb(0, 0, 0);
+                font-style: italic;
+                font-size: 3rem;
+            }
+
+            #cover img {
+                opacity: .5;
+                ;
+            }
+
+            .microlight {
+                font-family: monospace;
+                white-space: pre-wrap;
+                background-color:rgb(88 90 94 / 10%);
+                border-radius: 10px;
+                padding: 10px;
+                line-height: 1.5;
+            }
+            .slide p{
+                margin-bottom: 0px;
+                line-height: 1.5;
+            }
+            
+            .slide{
+                padding: 50px;
+
+            }
+            .slide::after {
+                left: calc(var(--slide-width) - 100px);
+            }
+    </style>
+</head>
+
+<body class="shower list">
+
+    <header class="caption">
+        <h1>JavaScript Arrays</h1>
+    </header>
+
+    <section class="slide" id="cover">
+        <h2>JavaScript Objects</h2>
+        <p>An object is an unordered collections of data, including primitive data, functions and other objects
+</p>
+    </section>
+
+<section class="slide">
+    <h2>Creating objects and accessing elements</h2>
+    <p>Objects are composed from keys and properties</p>
+    <div class=microlight>
+const user = {
+    name: 'John';
+    age: 35
+}
+    </div>
+</section>
+
+<section class="slide">
+    <h2>Creating objects and accessing elements</h2>
+    <p>You can access objects elements using dot notation or square brackets </p>
+                <div class=microlight style='font-size: 20px;'>
+const user = {
+    name: 'John';   
+    age: 35
+}
+console.log(user.name); // John
+console.log(user.age); // 35
+
+const dynamicKey = 'age';
+console.log(user['name']); // John
+console.log(user[dynamicKey]); // 35
+                </div>
+    </div>
+</section>
+
+<section class="slide">
+    <p>Objects can be nested within other objects</p>
+                <div class=microlight>
+const user = {
+    name: 'John',
+    contact: {
+        phone: 123-123-123,
+        address: {
+            city: 'Baia Mare',
+            country: 'Romania'
+        }
+    }
+}
+console.log(user.contact.address.city); // Baia Mare
+                </div>
+    </div>
+</section>
+
+<section class="slide">
+    <h2>What is <code>this</code>?</h2>
+    <p>In JavaScript, the <code>this</code> keyword refers to an object.</p>
+    <p>Which object depends on how <code>this</code> is being invoked (used or called).</p>
+    <p>The <code>this</code> keyword refers to different objects depending on how it is used:</p>
+    <br>
+    <ol>
+        <li class='next'>In an object method, <code>this</code> refers to the object.</li>
+        <li class='next'>Alone, <code>this</code> refers to the global object (window, environment).</li>
+        <li class='next'>In a function, <code>this</code> refers to the global object.</li>
+        <li class='next'>In an event, <code>this</code>his refers to the element that received the event.</li>
+    </ol>
+</section>
+
+<section class="slide">
+    <h2>Object methods</h2>
+    <p>Methods are actions can be performed on objects. Methods are functions stored as object properties.</p>
+                <div class=microlight style='font-size: 20px;'>
+const user = {
+    firstName: 'Johnny',
+    lastName: 'Deep',
+
+    getFullName() {
+        return `${this.firstName} ${this.lastName}`
+    }
+}
+console.log(user.getFullName()); // Johnny Deep
+                </div>
+    </div>
+</section>
+
+<section class="slide">
+    <h2>Constructor and <code>new</code> operator</h2>
+    <p>The {…} allow us to create a single object.</p>
+    <p>But when we want to create many similar object, we can use <strong>new</strong> operator.
+    We can use constructor functions to make multiple similar objects.
+</p>
+                <div class=microlight style='font-size: 20px;'>
+function User(firstName,lastName){
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+let user = new User('John', 34);
+let anotherUser = new User('Marry', 25);
+                </div>
+    </div>
+</section>
+
+<section class="slide">
+        <h2>Object useful methods</h2>
+        <p><strong>Object.keys()</strong> - retrieves the names of all the enumerable properties from an object. It is useful when you need to iterate over properties.</p>
+        <div class=microlight>
+const user = {
+    name: 'John';   
+    age: 35
+}
+console.log(Object.keys(user));
+// ['name','age']
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Object useful methods</h2>
+        <p><strong>Object.values()</strong> - it is like keys, but retrieve the values of an object. It's particularly useful
+            when you are more interested in the data stored rather than their property names.</p>
+        <div class=microlight>
+const user = {
+    name: 'John';   
+    age: 35
+}
+console.log(Object.values(user));
+// [ 'John', 35]
+        </div>
+    </section>
+
+    //todo spread operator si copiat dested objects
+    //de scos getters si setters
+
+    <section class="slide">
+        <h2>Getters and Setters</h2>
+        <p>Getters and setters are special methods that provide access to object properties. Getters are used to read values of
+        properties, while setters are used to write values to properties.</p>
+        <ol>
+            <li>Getters and setters allow you to control how your object properties are accessed and modified.</li>
+            <li>Getters and setters can be used to validate data before it is set to an object.</li>
+            <li>Getters and setters can be used to create properties that are calculated on the fly.</li>
+        </ol>
+    </section>
+
+    <section class="slide">
+        <h2>Get method</h2>
+        <p>Getters are functions that are used to access properties on an object. They are similar to methods, but they are not
+        called on an instance of an object. Instead, they are called on the object itself.</p>
+        <div class=microlight style='font-size: 18px;'>
+const user = {
+    firstName: 'Johnny',
+    lastName: 'Deep',
+
+    get fullName() {
+        return `${this.firstName} ${this.lastName}`
+    }
+}
+console.log(user.fullName); // Johnny Deep
+        </div>
+    </section>
+    
+    <section class="slide">
+        <h2>Set method</h2>
+        <p>The setter is a method that allows you to set the value of a property in an object. It is a special type of method that
+            is used to set the value of a property in an object. <em>The setter method is a great way to validate data</em></p>
+            <div class=microlight style='font-size: 18px;'>
+let user = {
+    name: 'John',
+    set name(value) {
+        if(value.length < 3) 
+            throw new Error('Name too short!')
+        this._name = value;
+    }
+};
+        </div>
+    </section>
+
+        <section class="slide">
+            <h2>Map</h2>
+        
+        </section>
+        
+        <section class="slide">
+            <h2>Set</h2>
+        
+        </section>
+        
+    <section class="slide" id="cover">
+        <h2>JavaScript Arrays</h2>
+        <p>Arrays store and organize multiple values in a flexible, indexed structure.</p>
+    </section>
+
+    <section class="slide">
+        <h2>Creating Arrays and accessing elements</h2>
+        <p>You can create arrays in JavaScript using square brackets [] and adding elements separated by commas.</p>
+        <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+console.log(fruits[0]); // Output: "apple;
+console.log(fruits[2]); // Output: "cherry;
+        </div>
+        <p>You can access elements in an array by their index,<strong> starting from 0</strong>.</p>
+    </section>
+
+    <section class="slide">
+        <h2>Modifying Elements</h2>
+        <p>You can change the value of an array element by assigning a new value to it.
+        </p>
+        <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+console.log(fruits); 
+// Output: ["apple", kiwi", "cherry"];
+        </div>
+
+    </section>
+
+    <section class="slide">
+        <h2>Adding and Removing Elements</h2>
+        <p>You can add elements to the end of an array using the <strong>push</strong> method and remove elements from
+            the end using the <strong>pop</strong> method.
+        </p>
+        <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+fruits.push("orange");
+// Output: ["apple", "kiwi", "cherry", "orange"]
+fruits.pop();
+// Output: ["apple", "kiwi", "cherry"];
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Iterating through Arrays:</h2>
+        <p>You can use loops to iterate through array elements.</p>
+        <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+for (let i = 0; i  fruits.length; i++) {
+    console.log(fruits[i]); 
+};
+
+for (const fruit of fruits) {
+    console.log(fruit); 
+} 
+        </div>
+    </section>
+
+    <section class="slide">
+        <h2>Iterating through Arrays:</h2>
+        <p>The <strong>forEach()</strong> method of Array instances executes a provided function once for each array
+            element.</p>
+                    <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+fruits.forEach((element) => {
+    console.log(element.toUpperCase()); 
+}); 
+// APPLE, BANANA, CHERRY 
+                    </div>
+    </section>
+
+    <section class="slide">
+        <h2>Changing or removing arrays elements</h2>
+        <p>The <strong>splice()</strong> method of Array instances changes the contents of an array by removing or replacing existing elements
+        and/or adding new elements in place.</p>
+        <p>Delete an element:</p>
+                <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+fruits.splice(1, 1) // from index 1 remove one element
+// apple, cherry
+                </div>
+    </section>
+
+    <section class="slide">
+        <h2>Changing or removing arrays elements</h2>
+        <p>Delete multiple elements with <strong>splice()</strong>:</p>
+                <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+fruits.splice(0, 2) // from index 0 remove two elements
+// cherry
+                </div>
+    </section>
+
+    <section class="slide">
+        <h2>Changing or removing arrays elements</h2>
+        <p>Insert elements using <strong>splice()</strong>:</p>
+        <p>For that we need to set deleteCount to 0:</p>
+                <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+fruits.splice(1, 0, "strawberry", "orange") // from index 1 
+// insert two elements
+// apple, banana, cherry, strawberry, orange
+                </div>
+    </section>
+
+    <section class="slide">
+        <h2>Changing or removing arrays elements</h2>
+        <p>Modifying elements with <strong>slice()</strong>:</p>
+        <p>It returns a new array copying to it all items from index start to end (not including end). The original array will not be modified.</p>
+                <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+fruits.splice(1, 3) // returns elements from 1 to 3
+// banana, cherry
+                </div>
+    </section>
+
+    <section class="slide">
+        <h2>Searching in arrays</h2>
+        <p>Using <strong>includes()</strong>:</p>
+        <p>The includes() method returns either a true or a false if a value exists in an array or not.</p>
+                <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+fruits.includes("apple") // true
+fruits.includes("lemon") // false
+                </div>
+    </section>
+
+    <section class="slide">
+        <h2>Searching in arrays</h2>
+        <p>Using <strong>indexOf()</strong>:</p>
+        <p>The indexOf() method returns the first index of a value in an array. If there is no match, the method returns -1.</p>
+                <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+fruits.indexOf("apple") // 0
+fruits.includes("lemon") // -1
+                </div>
+    </section>
+
+    <section class="slide">
+        <h2>Searching in arrays</h2>
+        <p>Using <strong>find()</strong>:</p>
+        <p>The find() method returns the <strong>first value</strong> in an array that matches the conditions of a function. If there is no match,
+        the method returns undefined.</p>
+                <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+fruits.find(element => element.length === 6) // banana
+                </div>
+    </section>
+
+    <section class="slide">
+        <h2>Searching in arrays</h2>
+        <p>Using <strong>filter()</strong>:</p>
+        <p>The filter() method returns a new array of <strong>all the values</strong> in an array that matches the conditions of a function. If
+        there is no match, the method returns an empty array.</p>
+                <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+fruits.filter(element => element.length === 6) // banana, cherry
+                </div>
+    </section>
+
+    <section class="slide">
+        <h2>Transform arrays</h2>
+<strong>map()</strong>
+        <p>It calls the callback function for each element of the array and returns the array of results.</p>
+                <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+fruits.map(element => element.length) 
+// 5, 6, 6
+                </div>
+    </section>
+
+    <section class="slide">
+        <h2>Transform arrays</h2>
+<strong>reduce()</strong>
+        <p>This method reduces an array of values down to just one value. The single value that is returned can be of any type.</p>
+                <div class=microlight>
+let fruits = ["apple", "banana", "cherry"];
+fruits.reduce((total, current) => total + ', ' + current) 
+// 'apple, banana, cherry'
+                </div>
+    </section>
+
+    <section class="slide">
+        <h2>Transform arrays</h2>
+<strong>reduce()</strong>
+                <div class=microlight>
+let arr = [1, 2, 3];
+arr.reduce((total, current) => total + current) 
+// 6
+                </div>
+    </section>
+
+
+
+
+    <section class="slide">
+     <h2 class="shout shrink">Q & A</h2>
+        <h3 class="shout shrink">Feedback</h3>
+    </section>
+
+    <section class="slide">
+    <h2 class="shout shrink">Thank you!</h2>
+    </section>
+
+    <div class="progress"></div>
+
+    <script src="shower/shower.js"></script>
+    <!-- Copyright © 3000 Yours Truly, Famous Inc. -->
+
+</body>
+
+</html>
